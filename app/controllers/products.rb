@@ -10,7 +10,7 @@ get '/add_new_product' do
   if logged_in?
       erb :"add_new_product"
   else
-      erb :"signup"
+      redirect to ('/signup')
   end
 end
 
@@ -22,10 +22,11 @@ post '/post_new_product' do
   price = params[:price]
 
   if Product.existing_product?(title) == false
+
   @newproduct = Product.create(title: title, description: description, location: location, price: price, user_id: session[:user_id])
-    redirect to("/profile")
+    redirect to ('/profile')
   else
-    redirect to('/profile')
+    redirect to ('/profile')
   end
 
 end

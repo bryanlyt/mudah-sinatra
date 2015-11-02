@@ -43,6 +43,7 @@
         <th>Product</th>
         <th>Location</th>
         <th>Price (RM)</th>
+        <th> </th>
       </tr>
       <% @current_user.favourites.each do |favourite| %>
         <% fav_product = Favourite.find_product(favourite.product_id) %>
@@ -55,7 +56,11 @@
           <td><%= fav_product.location %></td>
           <td><%= fav_product.price %></td>
           <td>
-
+<!-- 
+  <form action='/product/<%= fav_product.id %>/fav/<%= favourite.id %>/delete' method="post">
+    <input type='hidden' name="_method" value="delete">
+    <input type="submit" value="DELETE">
+  </form> -->
 
           </td>
         </tr>

@@ -25,7 +25,7 @@ post '/login' do
     @error ="Invalid password entered for username #{params[:user]["email"]}"
     erb :"login"
   else 
-    session[:user_id] = @login
+    session[:user_id] = @login.id
     redirect to ('/')
   end 
 end

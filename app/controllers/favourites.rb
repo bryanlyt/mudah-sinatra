@@ -4,7 +4,7 @@ post '/product/:product_id/fav' do
 
 # Non-logged in user forbidden to create favourite
     if session[:user_id].nil?
-      redirect to ('/')
+      redirect to ('/signup')
     else
 # Cannot favourite own product
       if product.user_id == session[:user_id]
@@ -15,6 +15,12 @@ post '/product/:product_id/fav' do
         redirect to ('/profile')
       end
     end
+end
+
+# Show all favourites
+get '/user/:user_id/fav' do
+  @userfav = Favourite.where(user_id: current_user.id)
+  erb :"fav"
 end
 
 
@@ -35,8 +41,8 @@ end
 
 
 # # Delete favourite
-# post '/product/:product_id/fav/:id/delete' do
-#   favourite = Favourite.find(params[:id])
-#   favourite.delete
+# delete '/product/:product_id/fav/:id/delete' do
+#   @favourite = Favourite.find(params[:id])
+#   @favourite.delete
 #   redirect to ('/profile')
 # end
