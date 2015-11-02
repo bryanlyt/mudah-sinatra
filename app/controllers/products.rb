@@ -1,37 +1,20 @@
 # Display single product
 get '/product/:id' do
   @product = Product.find_by(id: params[:id])
-
+  # @favprod = Favourite.list_product_favourite(params[:product_id])
   erb :product
 end
 
-# get '/questions/:id' do
-#   @question = Question.find_by(id: params[:id])
-#   @page_title = "#{@question.description} | Quora Clone"
-#   @answers_list = Answer.where(question_id: params[:id]).order(updated_at: :desc)
-#   erb :"questions/view"
-# end
-
-# # Create new product
-# post '/add_new_product' do
-#   title = params[:title]
-#   description = params[:description]
-#   location = params[:location]
-#   price = params[:price]
-# end
-
-# create a new product
+# Create a new product
 get '/add_new_product' do
   if logged_in?
       erb :"add_new_product"
   else
       erb :"signup"
   end
-
-
 end
 
-# submit a new product
+# Submit a new product
 post '/post_new_product' do
   title = params[:title]
   description = params[:description]

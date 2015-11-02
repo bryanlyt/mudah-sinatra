@@ -15,5 +15,28 @@ post '/product/:product_id/fav' do
         redirect to ('/profile')
       end
     end
-
 end
+
+
+# # Get all favourites 
+# get "/favourites/:id/all" do
+#   @favourites = Favourite.all
+#   @products = Product.all
+#   @user_id = session[:user].id
+#   erb :"favourites/all"
+# end
+
+# # Display single favourite
+# get '/product/:product_id/fav/:id' do
+#   @favourite = Favourite.find_by(id: params[:id])
+#   # @favprod = Favourite.list_product_favourite(params[:product_id])
+#   erb :profile
+# end
+
+
+# # Delete favourite
+# post '/product/:product_id/fav/:id/delete' do
+#   favourite = Favourite.find(params[:id])
+#   favourite.delete
+#   redirect to ('/profile')
+# end

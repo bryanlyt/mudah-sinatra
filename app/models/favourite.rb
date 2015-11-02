@@ -11,4 +11,8 @@ class Favourite < ActiveRecord::Base
     @favourites = Favourite.where(user_id: user_id)
   end
 
+  def self.list_product_favourite(product_id)
+  	@favprod = Favourite.where(product_id: product_id)
+	end
+
 end

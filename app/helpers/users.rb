@@ -16,4 +16,10 @@ helpers do
   	hash.merge({"user_id" => current_user.id})
   end
 
+	def current_product
+		if params[:id]
+			@current_product ||= Product.find_by_id(params[:id])
+		end
+	end
+
 end
