@@ -22,4 +22,10 @@ helpers do
 		end
 	end
 
+  def check_favourited(product)
+    # check if product has been favourited by user
+    return true if !logged_in?
+    !product.favourites.where(user_id: current_user.id).any?
+  end	
+
 end
