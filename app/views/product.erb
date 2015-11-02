@@ -1,0 +1,42 @@
+<div class="container">
+
+  <h1>Welcome to Mudah Sinatra</h1>
+  <center><p>NEXTACADEMY's Largest Marketplace!</p></center>
+  <br>
+<!-- Display single product -->
+  <h4><%= @product.title %></h4>
+
+    <table class="table table-responsive">
+      <tr>
+        <th>Description</th>
+        <td><%= @product.description %></td>
+      </tr>
+      <tr>
+        <th>Location</th>
+        <td><%= @product.location %></td>
+      </tr>
+      <tr>
+        <th>Price</th>
+        <td>$<%= @product.price %></td>
+      </tr>
+      <tr>
+        <th>Contact Seller</th>
+        <td><%= @product.user.name %><br>
+          <a href="mailto:<%= @product.user.email %>">
+            <%= @product.user.email %></a>
+        </td>
+      </tr>
+    </table>
+
+<hr> <!-- Line Separator -->
+
+  <div class="favourite">
+    <h4>Add this product to your wishlist:</h4>
+      <form id="favourite" action="/product/<%= @product.id %>/fav" method="post">  
+        <button class="btn btn-sm btn-primary btn-block" type="submit">FAVOURITE</button>
+      </form>
+      <br>
+  </div>
+
+</div>
+

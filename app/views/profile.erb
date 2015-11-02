@@ -1,0 +1,61 @@
+<div class="container">
+
+  <h1>Hello there, <%= @current_user.name %> !</h1>
+  <p><center>This is your Profile Dashboard page.</center></p>
+
+<!-- Add new product -->
+  <center>
+    <a href="/add_new_product"><button class="btn btn-primary">List New Product</button></a> 
+  </center>
+<br><br>
+<!-- No products listed by user -->
+  <% if @products.nil? %>
+    <p>You did not list any products!</p>
+
+<!-- Display all products listed by user -->
+  <% else %>
+    <h4>Your Listed Products</h4>
+    <table class="table table-responsive table-striped">
+      <tr>
+        <th>Product</th>
+        <th>Price (RM)</th>
+      </tr>
+      <% @products.each do |product| %>
+        <tr>
+          <td>
+            <a href="/product/<%= product.id %>" target="_blank">
+              <%= product.title %>
+            </a>
+          </td>
+          <td><%= product.price %></td>
+          <td>
+            <a href='/product/<%= product.id %>/edit' class="button">Edit</a>
+          </td>
+      <% end %>
+        </tr>
+    </table>
+  <% end %>
+
+<!-- Display user wishlist (favourites)) -->
+  <h4>Your Wishlist (Favourites)</h4>
+    <table class="table table-responsive table-striped">
+      <tr>
+        <th>Product</th>
+        <th>Location</th>
+        <th>Price (RM)</th>
+      </tr>
+      <% @current_user.favourites.each do |favourite| %>
+        <% fav_product = Favourite.find_product(favourite.product_id) %>
+        <tr>
+          <td>
+            <a href="/product/<%= fav_product.id %>">
+              <%= fav_product.title %>
+            </a>
+          </td>
+          <td><%= fav_product.location %></td>
+          <td><%= fav_product.price %></td>
+        </tr>
+      <% end %>
+    </table>
+
+</div>

@@ -1,2 +1,35 @@
-<h1>Hello World | Mudah Clone</h1>
-<p>See Me in views/index.html.erb</p>
+<div class="container" >
+
+  <h1>Welcome to Mudah Sinatra</h1>
+  <p><center>NEXTACADEMY's Largest Marketplace!</center></p>
+  <!-- Add new product -->
+  <center>
+    <a href="/add_new_product"><button class="btn btn-primary">List New Product</button></a> 
+  </center>
+  <br><br>
+<!-- Display a list of products -->
+  <div class="product_list">
+    <h4>Latest Products</h4>
+    <table class="table table-responsive table-striped">
+      <tr>
+      	<th> </th>
+        <th>Product</th>
+        <th>Location</th>
+        <th>Price (RM)</th>
+      </tr>
+      <% @products.each do |product| %>
+        <tr>
+        	<td class = "count">
+          <td>
+            <a href="/product/<%= product.id %>"  target="_blank">
+              <%= product.title %>
+            </a>
+          </td>
+          <td><%= product.location %></td>
+          <td><%= product.price %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+

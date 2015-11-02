@@ -6,4 +6,9 @@ class Favourite < ActiveRecord::Base
   def self.find_product(product_id)
     @product = Product.find(product_id)
   end
+
+  def self.list_user_favourite(user_id)
+    @favourites = Favourite.where(user_id: user_id)
+  end
+
 end

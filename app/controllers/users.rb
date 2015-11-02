@@ -1,34 +1,36 @@
-# Register / sign up
-post '/register' do
-  name = params[:name]
-  email = params[:email]
-  password = params[:password]
+# Register / sign up 
+get '/signup' do
+  erb :"signup"
+end
 
-  @new_user = User.create(name: name, email: email, password: password)
-  session[:user_id] = @new_user.id
-
-  redirect to ('/profile')
+post '/register' do 
+  @user = User.new(params[:user])
+  if @user.save
+    session[:user_id] = @user.id
+    redirect to('/')
+  else
+    @error = @user.errors.full_messages[0]
+    erb :"users/new"
+  end
 end
 
 # Login
 post '/login' do
-  email = params[:email]
-  password = params[:password]
-
-  @user = User.authenticate(email, password)
-  if @user.nil?
+  @login = User.authenticate(params[:user]["email"], params[:user]["password"])
+  case @login
+  when "username_invalid"
+    @error ="Invalid email entered"
+    erb :"login"
+  when "password_invalid"
+    @error ="Invalid password entered for username #{params[:user]["email"]}"
+    erb :"login"
+  else 
+    session[:user_id] = @login
     redirect to ('/')
-  else
-    session[:user_id] = @user.id
-    redirect to ('/profile')
-  end
+  end 
 end
 
 # User profile
-post '/profile' do
-  redirect to ('/profile')
-end
-
 get '/profile' do
   if session[:user_id].nil?
     redirect to ('/')
@@ -36,12 +38,13 @@ get '/profile' do
     @current_user = User.find(session[:user_id])
     @products = Product.list_user_product(session[:user_id])
     @favourites = Favourite.list_user_favourite(session[:user_id])
-    erb :dashboard
+    erb :profile
   end
 end
 
 # Logout
-post '/logout' do
+get '/logout' do
   session[:user_id] = nil
   redirect to ('/')
 end
+

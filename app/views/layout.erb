@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset = "utf-8">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/application.css">
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/bootstrap-theme.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="/js/application.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+
+
+
+
+  <title>Mudah Sinatra</title>
+</head>
+<body>
+  <nav class = "navbar navbar-inverse">
+    <div class = "containerfluid">
+      <a class="col-md-4 col-md-offset-3" href="/"><img src="/../img/mudah.png" alt="Mudah Sinatra" height="50" /></a>
+        <div class="center-block" id = "header-navbar">
+  
+        <% if logged_in? %> <!-- If user is logged in -->
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as <%= current_user.name %><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/profile">Profile</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/logout">Log Out</a></li>
+              </ul> <!-- END dropdown-menu -->
+            </li> <!-- END dropdown -->
+          </ul> <!-- END nav navbar-nav navbar-right -->
+
+        <% else %> <!-- If user is NOT logged in -->
+          <ul class="nav navbar-nav">
+            <li><a href="/signup">Sign Up</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="login-form">
+                    <form action="/login" method="post">
+                      <p>Sign into your account</p>
+                      <input type="email" placeholder="Email" required autofocus name="user[email]">
+                      <br>
+                      <input type="password" placeholder="Password" required name="user[password]">
+                      <br>
+                      <button class="btn btn-sm btn-primary btn-block" type="submit">Sign In</button>
+                    </form> <!-- END form -->
+                  </li> <!-- END login-form -->
+                </ul> <!-- END dropdown-menu -->
+              </li> <!-- END dropdown -->
+          </ul> <!-- END nav navbar-nav navbar-right -->
+        <% end %>
+      </div> <!-- END header-navbar -->
+    </div> <!-- END containerfluid -->
+  </nav> <!-- END navbar navbar-default -->
+
+  <%= yield %>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Hello there, <%= @current_user.name %> !</h1>
+  <p>This is your Edit Product page.</p>
+
+<!-- Edit Product -->
+<br>
+  <form action="/product/<%= @current_product.id %>/edit" method="post">
+  <input type="hidden" name="_method" value="put" />
+    Title:
+    <input name="title" type="text" value="<%= @current_product.title %>"><br>
+    Description:
+    <input name="description" type="textarea" value="<%= @current_product.description %>"><br>
+    Location:
+    <input name="location" type="text" value="<%= @current_product.location %>"><br>
+    Price:
+    <input name="price" type="text" value="<%= @current_product.price %>"><br>
+    <input type="submit" value="SUBMIT">
+  </form>
+
+<br>
+
+<!-- Delete Product  -->
+  <form action='/product/<%= @current_product.id %>/delete' method="post">
+    <input type="submit" value="DELETE">
+  </form>
+
+</div>
